@@ -35,7 +35,7 @@ export const lexString = (regex: string): Tokens =>
           "*",
           () =>
             ({
-              "~kind": "KleeneClosure",
+              "~kind": "Closure",
             }) as const,
         )
         .otherwise(
@@ -50,5 +50,3 @@ export const lexString = (regex: string): Tokens =>
       ...current,
       next,
     }));
-
-const foo = lex`(aa+bb)(a+b)*`;

@@ -12,7 +12,7 @@ export type Tokens =
       next?: Tokens;
     }
   | {
-      "~kind": "KleeneClosure";
+      "~kind": "Closure";
       next?: Tokens;
     }
   | {
