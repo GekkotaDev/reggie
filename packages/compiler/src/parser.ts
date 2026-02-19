@@ -1,23 +1,27 @@
 import type { Tokens } from "~/lexer/types";
 
+type Graph = {
+  [key: string]: string[];
+};
+
 export const parse = Object.assign(
-  (tokens: Tokens) =>
+  (tokens: Tokens, graph: Graph): Graph =>
     match(tokens)
-      .with({ "~kind": "GroupBegin" }, () => ({
-        edges: new Map([]),
+      .with({ "~kind": "GroupBegin" }, ({}) => ({
+        ...(tokens?.next ? parse.grouping({ tokens: tokens.next, graph }) : {}),
       }))
-      .with({ "~kind": "GroupEnd" }, () => {})
-      .with({ "~kind": "Closure" }, () => {})
-      .with({ "~kind": "Choice" }, () => {})
-      .with({ "~kind": "Symbol" }, () => {})
+      .with({ "~kind": "GroupEnd" }, () => ({}))
+      .with({ "~kind": "Closure" }, () => ({}))
+      .with({ "~kind": "Choice" }, () => ({}))
+      .with({ "~kind": "Symbol" }, () => ({}))
       .exhaustive(),
   {
-    grouping: (tokens: Tokens) =>
+    grouping: ({ tokens, graph }: { tokens: Tokens; graph: Graph }): Graph =>
       match(tokens)
-        .with({ "~kind": "GroupBegin" }, (token) => parse(token))
-        .with({ "~kind": "GroupEnd" }, () => {})
-        .with({ "~kind": "Choice" }, () => {})
-        .otherwise(() => ({
+        .with({ "~kind": "GroupBegin" }, (token) => parse(token, graph))
+        .with({ "~kind": "GroupEnd" }, () => ({}))
+        .with({ "~kind": "Choice" }, () => ({}))
+        .otherwise((token) => ({
           edges: [],
         })),
   },

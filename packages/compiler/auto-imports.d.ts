@@ -12,6 +12,7 @@ declare global {
   const chunk: typeof import('es-toolkit/array').chunk
   const compact: typeof import('es-toolkit/array').compact
   const countBy: typeof import('es-toolkit/array').countBy
+  const declare: typeof import('./src/utils/declare').declare
   const difference: typeof import('es-toolkit/array').difference
   const differenceBy: typeof import('es-toolkit/array').differenceBy
   const differenceWith: typeof import('es-toolkit/array').differenceWith

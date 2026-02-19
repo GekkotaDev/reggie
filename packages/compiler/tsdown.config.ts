@@ -5,6 +5,8 @@ export default defineConfig({
   exports: true,
   plugins: [
     autoImport.rolldown({
+      dirs: ["./src/utils"],
+
       imports: [
         {
           from: "ts-pattern",

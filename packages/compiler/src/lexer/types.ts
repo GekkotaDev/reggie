@@ -1,14 +1,14 @@
 export type Tokens =
   | {
-      "~kind": "GroupBegin";
+      "~kind": "UnionBegin";
       next?: Tokens;
     }
   | {
-      "~kind": "GroupEnd";
+      "~kind": "UnionEnd";
       next?: Tokens;
     }
   | {
-      "~kind": "Choice";
+      "~kind": "Or";
       next?: Tokens;
     }
   | {
