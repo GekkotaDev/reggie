@@ -1,8 +1,12 @@
 export type Nodes = //
-  Union | Group | Match;
+  Closure | Union | Group | Match;
+
+export type Closure = {
+  readonly type: "Closure";
+  readonly union: Union;
+};
 
 export type Union = {
-  readonly closure?: boolean;
   readonly type: "Union";
   readonly choices: Nodes[];
 };

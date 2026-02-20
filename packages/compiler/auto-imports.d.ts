@@ -23,6 +23,7 @@ declare global {
   const fill: typeof import('es-toolkit/array').fill
   const flatMap: typeof import('es-toolkit/array').flatMap
   const flatMapDeep: typeof import('es-toolkit/array').flatMapDeep
+  const flatRecurse: typeof import('./src/utils/ast').flatRecurse
   const flatten: typeof import('es-toolkit/array').flatten
   const flattenDeep: typeof import('es-toolkit/array').flattenDeep
   const flow: typeof import('es-toolkit/function').flow

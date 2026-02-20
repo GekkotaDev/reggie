@@ -14,21 +14,21 @@ export const lexString = (regex: string): Tokens =>
           "(",
           () =>
             ({
-              "~kind": "GroupBegin",
+              "~kind": "UnionBegin",
             }) as const,
         )
         .with(
           ")",
           () =>
             ({
-              "~kind": "GroupEnd",
+              "~kind": "UnionEnd",
             }) as const,
         )
         .with(
           "+",
           () =>
             ({
-              "~kind": "Choice",
+              "~kind": "Or",
             }) as const,
         )
         .with(
@@ -46,7 +46,7 @@ export const lexString = (regex: string): Tokens =>
             }) as const,
         ),
     )
-    .reduce((current, next) => ({
-      ...current,
-      next,
+    .reduceRight((current, next) => ({
+      ...next,
+      next: current,
     }));
