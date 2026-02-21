@@ -52,7 +52,7 @@ export const parse = Object.assign((tokens: Tokens) => parse.map(tokens), {
                 token["~kind"] === "Symbol"
                   ? [
                       { type: "Match", letter: token.character } as const,
-                      ...map(token.next!),
+                      ...map(token.next!, map),
                     ]
                   : [],
               ),
