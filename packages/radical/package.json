@@ -1,5 +1,5 @@
 {
-  "name": "@reggie/compiler",
+  "name": "tsdown-starter",
   "type": "module",
   "version": "0.0.0",
   "description": "A starter for creating a TypeScript package.",
@@ -35,14 +35,6 @@
     "bumpp": "^10.3.2",
     "tsdown": "^0.18.1",
     "typescript": "^5.9.3",
-    "unplugin-auto-import": "^21.0.0",
     "vitest": "^4.0.16"
-  },
-  "dependencies": {
-    "@sinclair/parsebox": "^0.11.1",
-    "es-toolkit": "^1.44.0",
-    "ngraph.graph": "^20.1.2",
-    "sonic-forest": "^1.2.1",
-    "ts-pattern": "^5.9.0"
   }
 }

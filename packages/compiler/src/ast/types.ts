@@ -1,4 +1,4 @@
-export type Nodes = //
+export type Node = //
   Closure | Union | Group | Match;
 
 export type Closure = {
@@ -8,7 +8,7 @@ export type Closure = {
 
 export type Union = {
   readonly type: "Union";
-  readonly choices: Nodes[];
+  readonly choices: Node[];
 };
 
 export type Group = {

@@ -1,8 +1,8 @@
 import type { Tokens } from "~/lexer/types";
-import type { Nodes, Union, Match, Closure } from "~/ast/types";
+import type { Node, Union, Match, Closure } from "~/ast/types";
 
 export const parse = Object.assign((tokens: Tokens) => parse.map(tokens), {
-  map: (tokens: Tokens): Nodes[] =>
+  map: (tokens: Tokens): Node[] =>
     match(tokens)
       .with({ "~kind": "UnionBegin" }, (token) =>
         token?.next === undefined ? [] : parse.map(token.next),
