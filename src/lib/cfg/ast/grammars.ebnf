@@ -1,0 +1,5 @@
+<expression> ::= (<closure> | <grouping> | <choice> | <alphabet>)+
+<alphabet>   ::= ("a" | "b")+
+<grouping>   ::= "(" <expression> ")"
+<choice>     ::= <expression> "+" <expression>
+<closure>    ::= <grouping> "*"

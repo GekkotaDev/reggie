@@ -1,5 +1,7 @@
 packages:
   - packages/*
 onlyBuiltDependencies:
-  - esbuild
   - '@tailwindcss/oxide'
+  - carbon-components-svelte
+  - esbuild
+  - svelte-preprocess
