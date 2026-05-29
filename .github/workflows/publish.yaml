@@ -61,6 +61,9 @@ jobs:
         # If you don't have `beforeBuildCommand` configured you may want to build your frontend here too.
         run: pnpm install # change this to npm or pnpm depending on which one you use.
 
+      - name: Get app version
+        run: echo "APP_VERSION=$(jq -r .version src-tauri/tauri.conf.json)" >> $GITHUB_ENV
+
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -71,3 +74,34 @@ jobs:
           releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}
+
+      # TODO: Combine this with the basic workflow and upload the files to the Release.
+      - name: Upload Deb bundle
+        uses: actions/upload-artifact@v3
+        with:
+          name: Debian Bundle
+          path: ${{ github.workspace }}/src-tauri/target/release/bundle/deb/appname_${{ env.APP_VERSION }}_amd64.deb
+
+      - name: Upload RPM bundle
+        uses: actions/upload-artifact@v3
+        with:
+          name: RPM Bundle
+          path: ${{ github.workspace }}/src-tauri/target/release/bundle/rpm/appname-${{ env.APP_VERSION }}-1.x86_64.rpm
+
+      - name: Upload AppImage bundle
+        uses: actions/upload-artifact@v3
+        with:
+          name: AppImage Bundle
+          path: ${{ github.workspace }}/src-tauri/target/release/bundle/appimage/appname_${{ env.APP_VERSION }}_amd64.AppImage
+      
+      - name: Upload MSI bundle
+        uses: actions/upload-artifact@v3
+        with:
+          name: MSI Bundle
+          path: ${{ github.workspace }}/src-tauri/target/release/bundle/msi/appname_${{ env.APP_VERSION }}_x64_en-US.msi
+
+      - name: Upload EXE bundle
+        uses: actions/upload-artifact@v3
+        with:
+          name: EXE Bundle
+          path: ${{ github.workspace }}/src-tauri/target/release/bundle/exe/appname_${{ env.APP_VERSION }}_x64-setup.exe
