@@ -220,7 +220,7 @@ ${createCfg.fromAst(parse(lexString(regularExpression)))}
           }}
         />
 
-        <ButtonSet class="absolute bottom-8 right-26">
+        <!-- <ButtonSet class="absolute bottom-8 right-26">
           <Button
             on:click={() => {
               if (pdaTransitionStack.length <= 0) return;
@@ -247,7 +247,7 @@ ${createCfg.fromAst(parse(lexString(regularExpression)))}
             iconDescription="Reset"
             tooltipPosition="top"
           />
-        </ButtonSet>
+        </ButtonSet> -->
       </div>
     </Column>
   </Row>

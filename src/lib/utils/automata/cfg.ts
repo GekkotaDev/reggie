@@ -20,8 +20,11 @@ const fromAst = (ast: Node[]) => {
           union.choices
             .map((choice) =>
               match(choice)
-                .with({ type: "Group" }, ({ matches }) =>
-                  matches.map(({ letter }) => letter).join(""),
+                .with(
+                  { type: "Group" },
+                  ({ matches }) =>
+                    matches.map(({ letter }) => `${letter}`).join("") +
+                    variable,
                 )
                 .otherwise(() => ""),
             )

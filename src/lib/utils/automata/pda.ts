@@ -80,19 +80,19 @@ const toMermaid = (
           if (character.startsWith(options.characters.pop) && stack.length) {
             stack.pop();
             return [
-              `n${id} -->|"${character}"| npop-${id}-${map.get(node)!.id}[POP] --> n${map.get(node)!.id}`,
+              `n${id} -->|"${character}"| npop-${id}-${map.get(node)!.id}[PUSH] --> n${map.get(node)!.id}`,
             ];
           }
 
           if (character.startsWith(options.characters.pop)) {
             return [
-              `n${id} -->|"Δ"| npop-${id}-Δ[POP] --> n${map.get(node)!.id}`,
-              `n${id} -->|"${character}"| npop-${id}-${map.get(node)!.id}[POP] --> n${map.get(node)!.id}`,
+              `n${id} -->|"Δ"| npop-${id}-Δ[PUSH] --> n${map.get(node)!.id}`,
+              `n${id} -->|"${character}"| npop-${id}-${map.get(node)!.id}[PUSH] --> n${map.get(node)!.id}`,
             ];
           }
 
           return [
-            `n${id} -->|"${character}"| npop-${id}-${map.get(node)!.id}[POP] --> n${map.get(node)!.id}`,
+            `n${id} -->|"${character}"| npop-${id}-${map.get(node)!.id}[PUSH] --> n${map.get(node)!.id}`,
           ];
         });
       }),
@@ -103,7 +103,10 @@ const toMermaid = (
     .toArray()
     .flatMap(([, { type, id }]) =>
       type === "final"
-        ? `n${id} -->|"Δ"| n${id}-cleanup[POP] --> n${id}-accept((ACCEPTED))`
+        ? [
+            `n${id} -->|"Δ"| n${id}-cleanup[POP] -->|"Δ"| n${id}-accept((ACCEPTED))`,
+            `n${id}-cleanup[POP] -->|"${options.characters.pop}${options.characters.push}"| n${id}-cleanup`,
+          ].join("\n")
         : "",
     )
     .filter((string) => string !== "");
